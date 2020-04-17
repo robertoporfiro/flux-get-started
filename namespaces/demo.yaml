@@ -4,3 +4,10 @@ metadata:
   labels:
     name: demo
   name: demo
+# NS test
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test
+  labels:
+    name: test
