@@ -5,12 +5,6 @@ metadata:
   name: test-flux
   labels:
     name: test-flux
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    name: demo
-  name: demo
 # NS test
 apiVersion: v1
 kind: Namespace
@@ -18,3 +12,10 @@ metadata:
   name: test
   labels:
     name: test
+# NS demo
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    name: demo
+  name: demo
