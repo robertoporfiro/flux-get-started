@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  # rolebinding.rbac.authorization.k8s.io/k8sm-dev-aks-01:tester:namespace-view-role-binding
+  name: k8sm-dev-aks-01:tester:namespace-view-role-binding
+  namespace: tdmi
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: "e534feee-373b-4855-965d-fdd40cd04e29" # DP_TDMI_Azure_App_Tester

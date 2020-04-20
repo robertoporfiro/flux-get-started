@@ -1,0 +1,32 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: tdmi
+  # role.rbac.authorization.k8s.io/k8sm-dev-aks-01:developer:namespace-developer-role
+  name: k8sm-dev-aks-01:developer:namespace-developer-role
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["get","describe","list","watch","exec"]
+- apiGroups:
+  - '*'
+  resources:
+  - 'pods/exec'
+  - 'pods/portforward'
+  - 'services/portforward'
+  verbs:
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: k8sm-dev-aks-01:developer:namespace-developer-role-binding
+  namespace: tdmi
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: k8sm-dev-aks-01:developer:namespace-developer-role
+#subjects:
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: Group
+#  name: "b9458bd7-e77d-43cb-801f-1c3a8dc3171e" # EDP_TDMI_Azure_App_Developer

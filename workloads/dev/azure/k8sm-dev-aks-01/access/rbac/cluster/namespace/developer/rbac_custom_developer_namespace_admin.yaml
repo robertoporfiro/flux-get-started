@@ -1,0 +1,40 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: tdmi
+  # role.rbac.authorization.k8s.io/k8sm-dev-aks-01:developer:namespace-admin-role
+  name: k8sm-dev-aks-01:developer:namespace-admin-role
+rules:
+- apiGroups: ["apps"] # deployments grants
+  resources: ["deployments"]
+  verbs: ["get","create", "list", "watch", "delete", "update", "patch"]
+
+- apiGroups: ["extensions"] # "" indicates the core API group
+  resources: ["deployments"]
+  verbs: ["create","delete"]
+
+- apiGroups: [""] # pods grants
+  resources: ["pods"]
+  verbs: ["delete"]
+
+- apiGroups: [""] # services grants
+  resources: ["services"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+- apiGroups: [""] # persistent volume claims grants
+  resources: ["persistentvolumeclaims"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: k8sm-dev-aks-01:developer:namespace-admin-role-binding
+  namespace: tdmi
+roleRef:
+  kind: Role
+  name: k8sm-dev-aks-01:developer:namespace-admin-role
+  apiGroup: rbac.authorization.k8s.io
+#subjects:
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: Group
+#  name: "b9458bd7-e77d-43cb-801f-1c3a8dc3171e" # EDP_TDMI_Azure_App_Developer

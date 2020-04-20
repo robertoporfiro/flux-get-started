@@ -1,0 +1,19 @@
+# This cluster role binding allows anyone each "Group ID" group to manage this Cluster in the specific namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  # role.rbac.authorization.k8s.io/k8sm-dev-aks-01:developer:namespace-custom-admin-role
+  name: k8sm-dev-aks-01:developer:namespace-custom-admin-role
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: cluster-admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: "b9458bd7-e77d-43cb-801f-1c3a8dc3171e" # EDP_TDMI_Azure_App_Developer
+  namespace: tdmi
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: "d40687ab-93d7-4214-9f5e-528800de6ca2" # EDP_MCRS_Azure_App_Developer
+  namespace: mcrs

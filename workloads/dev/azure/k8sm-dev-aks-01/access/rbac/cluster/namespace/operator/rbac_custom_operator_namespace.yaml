@@ -1,0 +1,36 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: tdmi
+  # role.rbac.authorization.k8s.io/k8sm-dev-aks-01:operator:namespace-admin-role
+  name: k8sm-dev-aks-01:operator:namespace-admin-role
+rules:
+- apiGroups: ["apps"] # for deployments
+  resources: ["deployments"]
+  verbs: ["get","create", "list", "watch", "delete", "update", "patch"]
+- apiGroups: ["extensions"] # "" indicates the core API group
+  resources: ["deployments"]
+  verbs: ["create","delete"]
+- apiGroups: [""] # for pods
+  resources: ["pods"]
+  verbs: ["delete"]
+- apiGroups: [""] # for services
+  resources: ["services"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups: [""] # for persistent volume claims
+  resources: ["persistentvolumeclaims"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: k8sm-dev-aks-01:operator:namespace-admin-role-binding
+  namespace: tdmi
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: "310af66b-3a8d-4e32-a204-c997c4aa3fd3" # EDP_DEVOPS_INFRAADMIN_DEV
+roleRef:
+  kind: Role
+  name: k8sm-dev-aks-01:operator:namespace-admin-role
+  apiGroup: rbac.authorization.k8s.io

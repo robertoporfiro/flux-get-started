@@ -1,0 +1,144 @@
+# This Cluster Role define the allow rules manage in the Cluster scope.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  # clusterrole.rbac.authorization.k8s.io/k8sm-dev-aks-01:operator:cluster-admin-cluster-role-template
+  name: k8sm-dev-aks-01:operator:cluster-admin-cluster-role-template
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - persistentvolumeclaims
+  - persistentvolumeclaims/status
+  - persistentvolumes
+  - persistentvolumes/status
+  - pods
+  - pods/attach
+  - pods/exec
+  - pods/portforward
+  - pods/proxy
+  - pods/log
+  - pods/status
+  - secrets
+  - services
+  - services/proxy
+  - services/status
+  verbs:
+  - create
+  - get
+  - list
+  - update
+  - watch
+  - exec
+
+- apiGroups:
+  - "*"
+  resources:
+  - namespaces
+  verbs:
+  - get
+
+- apiGroups:
+  - apps       # New Api
+  - extensions # Old Api
+  resources:
+  - deployments
+  - deployments/rollback
+  - deployments/scale
+  - deployments/status
+  - replicasets
+  - replicasets/scale
+  - replicasets/status
+  - statefulsets
+  - statefulsets/scale
+  - statefulsets/status
+  verbs:
+  - create
+  - get
+  - list
+  - update
+  - watch
+  - exec
+
+- apiGroups:
+  - extensions
+  resources:
+  - ingresses
+  - ingresses/status
+
+  verbs:
+  - "*"
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  - horizontalpodautoscalers/status
+  verbs:
+  - create
+  - get
+  - list
+  - update
+  - watch
+  - exec
+
+- apiGroups:
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - get
+
+- apiGroups:
+  - batch
+  resources:
+  - cronjobs
+  - jobs
+  - jobs/status
+  verbs:
+  - create
+  - get
+  - list
+  - update
+  - watch
+  - exec
+
+- apiGroups:
+  - "*"
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - servicemonitors
+  verbs:
+  - get
+  - list
+  - watch
+
+# In order to test and impersonate a/an (user/group/serviceaccount), the --as and --as-group commands require the following RBAC rules to be used:
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - selfsubjectaccessreviews
+  - selfsubjectrulesreviews
+  verbs:
+  - create
+---
+  # This Cluster Role Binding allows anyone in the "Group ID" group assign to manage this Cluster in any namespace.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+ name: k8sm-dev-aks-01:operator:cluster-admin-cluster-role-binding-template
+roleRef:
+ apiGroup: rbac.authorization.k8s.io
+ kind: ClusterRole
+ name: k8sm-dev-aks-01:operator:cluster-admin-cluster-role-template
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: "Group_ID" # Group ID - EDP_TDMI_Azure_App_Developer

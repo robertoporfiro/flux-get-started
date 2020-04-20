@@ -1,0 +1,14 @@
+# NS Tdmi
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tdmi
+  labels:
+    name: tdmi
+# NS MCRS
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mcrs
+  labels:
+    name: mcrs
