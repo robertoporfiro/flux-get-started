@@ -26,10 +26,10 @@ kind: RoleBinding
 metadata:
   name: k8sm-dev-aks-01:operator:namespace-admin-role-binding
   namespace: tdmi
-subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: "310af66b-3a8d-4e32-a204-c997c4aa3fd3" # EDP_DEVOPS_INFRAADMIN_DEV
+#subjects:
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: Group
+#  name: "310af66b-3a8d-4e32-a204-c997c4aa3fd3" # EDP_DEVOPS_INFRAADMIN_DEV
 roleRef:
   kind: Role
   name: k8sm-dev-aks-01:operator:namespace-admin-role

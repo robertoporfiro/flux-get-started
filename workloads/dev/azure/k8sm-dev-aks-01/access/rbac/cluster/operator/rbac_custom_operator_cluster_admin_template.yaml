@@ -138,7 +138,7 @@ roleRef:
  apiGroup: rbac.authorization.k8s.io
  kind: ClusterRole
  name: k8sm-dev-aks-01:operator:cluster-admin-cluster-role-template
-subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: "Group_ID" # Group ID - EDP_TDMI_Azure_App_Developer
+#subjects:
+#- apiGroup: rbac.authorization.k8s.io
+#  kind: Group
+#  name: "Group_ID" # Group ID - EDP_TDMI_Azure_App_Developer
